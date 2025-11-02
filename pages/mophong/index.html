@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mô phỏng FBP 3D - Filter Back-Projection Platform</title>
+    <!-- Custom Font -->
+    <link rel="stylesheet" href="../../assets/global-fonts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../components/buttons.css" />
+    <link rel="stylesheet" href="../../components/header.css" />
+    <link rel="stylesheet" href="../../components/footer.css" />
+    <link rel="stylesheet" href="../../components/cards.css" />
+    <link rel="stylesheet" href="mophong.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="dynamic-header" id="header">
+      <div class="header-container">
+        <a href="../home/index.html" class="header-brand">
+          <svg class="logo" viewBox="0 0 40 40" width="40" height="40">
+            <defs>
+              <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18" fill="url(#logoGradient)"/>
+            <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="brand-text">FBP</span>
+        </a>
+
+        <nav class="header-nav" id="mainNav">
+          <a href="../home/index.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Trang chủ</span>
+          </a>
+         
+          <a href="../mophong/index.html" class="nav-link active">
+            <i class="fas fa-cube"></i>
+            <span>Mô phỏng 3D</span>
+          </a>
+          
+          <a href="../chatbot/index.html" class="nav-link">
+            <i class="fas fa-comments"></i>
+            <span>Chatbot</span>
+          </a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn-auth btn-login" href="../auth/index.html#login">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Đăng nhập</span>
+          </a>
+          <a class="btn-auth btn-register" href="../auth/index.html#register">
+            <i class="fas fa-user-plus"></i>
+            <span>Đăng ký</span>
+          </a>
+          <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <span class="badge">
+            <i class="fas fa-cube"></i> 
+            Interactive 3D Simulation
+          </span>
+          <h1 class="hero-title">
+            Mô phỏng FBP 3D
+            <span class="gradient-text">Tương tác trực quan</span>
+          </h1>
+          <p class="hero-subtitle">
+            Trải nghiệm thuật toán Filter Back-Projection với giao diện 3D tương tác, 
+            visualize từng bước xử lý và điều chỉnh tham số real-time.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn-primary" id="startSimBtn">
+              <i class="fas fa-play"></i>
+              <span>Bắt đầu mô phỏng</span>
+            </button>
+            <button class="btn-outline" id="tutorialBtn">
+              <i class="fas fa-book"></i>
+              <span>Hướng dẫn</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-section">
+      <div class="container">
+        <div class="simulation-workspace">
+          
+          <!-- Left Sidebar - Controls -->
+          <aside class="control-sidebar card">
+            <div class="sidebar-header">
+              <h3>
+                <i class="fas fa-sliders-h"></i>
+                Điều khiển
+              </h3>
+              <button class="btn-icon" id="resetAllBtn" title="Reset tất cả">
+                <i class="fas fa-redo"></i>
+              </button>
+            </div>
+
+            <div class="control-sections">
+              
+              <!-- Input Section -->
+              <div class="control-section">
+                <h4>
+                  <i class="fas fa-upload"></i>
+                  Nguồn dữ liệu
+                </h4>
+                <div class="input-tabs">
+                  <button class="input-tab active" data-tab="file">
+                    <i class="fas fa-file-image"></i>
+                    <span>File</span>
+                  </button>
+                  <button class="input-tab" data-tab="phantom">
+                    <i class="fas fa-brain"></i>
+                    <span>Phantom</span>
+                  </button>
+                  <button class="input-tab" data-tab="webcam">
+                    <i class="fas fa-camera"></i>
+                    <span>Camera</span>
+                  </button>
+                </div>
+
+                <!-- File Tab -->
+                <div class="tab-content active" id="file-tab">
+                  <div class="upload-zone" id="uploadZone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Kéo thả file vào đây</p>
+                    <span>hoặc</span>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <button class="btn-secondary" onclick="document.getElementById('fileInput').click()">
+                      Chọn file
+                    </button>
+                    <small>PNG, JPG, DICOM (max 10MB)</small>
+                  </div>
+                  <div class="file-preview" id="filePreview"></div>
+                </div>
+
+                <!-- Phantom Tab -->
+                <div class="tab-content" id="phantom-tab">
+                  <div class="phantom-selector">
+                    <label>Chọn phantom:</label>
+                    <select id="phantomSelect" class="custom-select">
+                      <option value="shepp-logan">Shepp-Logan</option>
+                      <option value="circle">Circle</option>
+                      <option value="square">Square</option>
+                      <option value="custom">Custom Pattern</option>
+                    </select>
+                    <button class="btn-secondary full-width" id="generatePhantomBtn">
+                      <i class="fas fa-magic"></i>
+                      Tạo phantom
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Webcam Tab -->
+                <div class="tab-content" id="webcam-tab">
+                  <div class="webcam-container">
+                    <video id="webcamVideo" autoplay playsinline></video>
+                    <canvas id="webcamCanvas" style="display:none;"></canvas>
+                    <div class="webcam-controls">
+                      <button class="btn-secondary full-width" id="startCameraBtn">
+                        <i class="fas fa-video"></i>
+                        Bật camera
+                      </button>
+                      <button class="btn-primary full-width" id="captureBtn" style="display:none;">
+                        <i class="fas fa-camera"></i>
+                        Chụp ảnh
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Parameters Section -->
+              <div class="control-section">
+                <h4>
+                  <i class="fas fa-cog"></i>
+                  Tham số FBP
+                </h4>
+                
+                <div class="param-group">
+                  <label>
+                    Số projections: 
+                    <strong id="projValue">180</strong>
+                  </label>
+                  <input type="range" id="numProjections" min="30" max="360" value="180" step="30" class="custom-slider">
+                  <div class="slider-marks">
+                    <span>30</span>
+                    <span>180</span>
+                    <span>360</span>
+                  </div>
+                </div>
+
+                <div class="param-group">
+                  <label>
+                    Filter type:
+                  </label>
+                  <select id="filterType" class="custom-select">
+                    <option value="ramp">Ramp (Ram-Lak)</option>
+                    <option value="shepp-logan">Shepp-Logan</option>
+                    <option value="hamming">Hamming</option>
+                    <option value="hann">Hann</option>
+                    <option value="none">Không filter</option>
+                  </select>
+                </div>
+
+                <div class="param-group">
+                  <label>
+                    Kích thước ảnh:
+                    <strong id="sizeValue">256</strong>px
+                  </label>
+                  <input type="range" id="imageSize" min="128" max="512" value="256" step="64" class="custom-slider">
+                  <div class="slider-marks">
+                    <span>128</span>
+                    <span>256</span>
+                    <span>512</span>
+                  </div>
+                </div>
+
+                <div class="param-group">
+                  <label>
+                    <input type="checkbox" id="showStepsCheck" checked>
+                    Hiển thị từng bước
+                  </label>
+                </div>
+              </div>
+
+              <!-- Actions Section -->
+              <div class="control-section actions-section">
+                <button class="btn-primary full-width" id="runBtn">
+                  <i class="fas fa-play"></i>
+                  <span>Chạy mô phỏng</span>
+                </button>
+                <button class="btn-outline full-width" id="pauseBtn" disabled>
+                  <i class="fas fa-pause"></i>
+                  <span>Tạm dừng</span>
+                </button>
+                <button class="btn-outline full-width" id="downloadBtn">
+                  <i class="fas fa-download"></i>
+                  <span>Tải kết quả</span>
+                </button>
+              </div>
+
+            </div>
+          </aside>
+
+          <!-- Center - 3D Visualization -->
+          <main class="visualization-main">
+            
+            <!-- Status Bar -->
+            <div class="status-bar-top">
+              <div class="status-group">
+                <div class="status-badge">
+                  <i class="fas fa-circle-notch fa-spin" style="display:none;" id="statusSpinner"></i>
+                  <i class="fas fa-circle" id="statusIcon"></i>
+                  <span id="statusText">Sẵn sàng</span>
+                </div>
+              </div>
+              <div class="status-group">
+                <div class="status-item">
+                  <i class="fas fa-clock"></i>
+                  <span>Thời gian: <strong id="timeDisplay">0s</strong></span>
+                </div>
+                <div class="status-item">
+                  <i class="fas fa-chart-line"></i>
+                  <span>Tiến độ: <strong id="progressDisplay">0%</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3D Canvas Area -->
+            <div class="canvas-area card">
+              <div class="canvas-header">
+                <h3>Visualization 3D</h3>
+                <div class="view-controls">
+                  <button class="btn-icon" data-view="front" title="Mặt trước">
+                    <i class="fas fa-cube"></i>
+                  </button>
+                  <button class="btn-icon" data-view="top" title="Mặt trên">
+                    <i class="fas fa-layer-group"></i>
+                  </button>
+                  <button class="btn-icon" data-view="side" title="Mặt bên">
+                    <i class="fas fa-box"></i>
+                  </button>
+                  <button class="btn-icon" id="fullscreenBtn" title="Toàn màn hình">
+                    <i class="fas fa-expand"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="canvas-wrapper" id="canvasWrapper">
+                <canvas id="mainCanvas"></canvas>
+                <div class="canvas-overlay" id="canvasOverlay">
+                  <div class="overlay-message">
+                    <i class="fas fa-cube fa-3x"></i>
+                    <h4>Chưa có dữ liệu</h4>
+                    <p>Tải ảnh lên hoặc tạo phantom để bắt đầu</p>
+                  </div>
+                </div>
+              </div>
+              <div class="canvas-footer">
+                <div class="canvas-info">
+                  <span><i class="fas fa-mouse"></i> Kéo để xoay</span>
+                  <span><i class="fas fa-search"></i> Scroll để zoom</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress Timeline -->
+            <div class="timeline-container card">
+              <h4>
+                <i class="fas fa-stream"></i>
+                Tiến trình xử lý
+              </h4>
+              <div class="timeline">
+                <div class="timeline-step" data-step="1">
+                  <div class="step-icon">
+                    <i class="fas fa-image"></i>
+                  </div>
+                  <div class="step-content">
+                    <h5>Input Image</h5>
+                    <p>Ảnh gốc</p>
+                  </div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-step" data-step="2">
+                  <div class="step-icon">
+                    <i class="fas fa-wave-square"></i>
+                  </div>
+                  <div class="step-content">
+                    <h5>Sinogram</h5>
+                    <p>Radon Transform</p>
+                  </div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-step" data-step="3">
+                  <div class="step-icon">
+                    <i class="fas fa-filter"></i>
+                  </div>
+                  <div class="step-content">
+                    <h5>Filtering</h5>
+                    <p>Áp dụng filter</p>
+                  </div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-step" data-step="4">
+                  <div class="step-icon">
+                    <i class="fas fa-undo"></i>
+                  </div>
+                  <div class="step-content">
+                    <h5>Back-Projection</h5>
+                    <p>Tái tạo ảnh</p>
+                  </div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-step" data-step="5">
+                  <div class="step-icon">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="step-content">
+                    <h5>Result</h5>
+                    <p>Kết quả</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </main>
+
+          <!-- Right Sidebar - Results -->
+          <aside class="results-sidebar card">
+            <h3>
+              <i class="fas fa-chart-bar"></i>
+              Kết quả
+            </h3>
+
+            <div class="result-sections">
+              
+              <!-- Image Comparison -->
+              <div class="result-section">
+                <h4>So sánh ảnh</h4>
+                <div class="image-compare">
+                  <div class="compare-item">
+                    <label>Original</label>
+                    <canvas id="originalCanvas" width="200" height="200"></canvas>
+                  </div>
+                  <div class="compare-item">
+                    <label>Reconstructed</label>
+                    <canvas id="reconstructedCanvas" width="200" height="200"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Metrics -->
+              <div class="result-section">
+                <h4>Chỉ số chất lượng</h4>
+                <div class="metrics-grid">
+                  <div class="metric-card">
+                    <div class="metric-icon">
+                      <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="metric-content">
+                      <span class="metric-label">PSNR</span>
+                      <strong class="metric-value" id="psnrValue">--</strong>
+                      <small>dB</small>
+                    </div>
+                  </div>
+                  <div class="metric-card">
+                    <div class="metric-icon">
+                      <i class="fas fa-image"></i>
+                    </div>
+                    <div class="metric-content">
+                      <span class="metric-label">SSIM</span>
+                      <strong class="metric-value" id="ssimValue">--</strong>
+                      <small>index</small>
+                    </div>
+                  </div>
+                  <div class="metric-card">
+                    <div class="metric-icon">
+                      <i class="fas fa-stopwatch"></i>
+                    </div>
+                    <div class="metric-content">
+                      <span class="metric-label">Time</span>
+                      <strong class="metric-value" id="timeValue">--</strong>
+                      <small>seconds</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sinogram Preview -->
+              <div class="result-section">
+                <h4>Sinogram</h4>
+                <canvas id="sinogramCanvas" width="200" height="200"></canvas>
+              </div>
+
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="container">
+        <h2 class="section-title">Tính năng nổi bật</h2>
+        <div class="features-grid">
+          <div class="feature-card card">
+            <div class="feature-icon">
+              <i class="fas fa-cube"></i>
+            </div>
+            <h3>Visualization 3D</h3>
+            <p>Xem trực quan quá trình FBP trong không gian 3D với khả năng xoay, zoom tự do.</p>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3>Real-time Processing</h3>
+            <p>Thuật toán tối ưu chạy trực tiếp trên trình duyệt, không cần server.</p>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon">
+              <i class="fas fa-sliders-h"></i>
+            </div>
+            <h3>Tùy chỉnh tham số</h3>
+            <p>Điều chỉnh số projections, filter type và xem kết quả ngay lập tức.</p>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Đánh giá chất lượng</h3>
+            <p>Tính toán PSNR, SSIM và các metrics khác để đánh giá độ chính xác.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-brand">
+              <svg class="footer-logo" viewBox="0 0 40 40" width="40" height="40">
+                <defs>
+                  <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+                <circle cx="20" cy="20" r="18" fill="url(#footerGradient)"/>
+                <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+              <span>FBP</span>
+            </div>
+            <p class="footer-desc">
+              Nền tảng học tập thuật toán Filter Back-Projection chuyên nghiệp và hiệu quả.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Học tập</h4>
+            <ul class="footer-links">
+              <li><a href="../theory/index.html"><i class="fas fa-angle-right"></i> Lý thuyết</a></li>
+              <li><a href="../mophong/index.html"><i class="fas fa-angle-right"></i> Mô phỏng 3D</a></li>
+              <li><a href="../exercises/index.html"><i class="fas fa-angle-right"></i> Bài tập</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Về chúng tôi</h4>
+            <ul class="footer-links">
+              <li><a href="../about/index.html"><i class="fas fa-angle-right"></i> Giới thiệu</a></li>
+              <li><a href="../contact/index.html"><i class="fas fa-angle-right"></i> Liên hệ</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Theo dõi</h4>
+            <div class="footer-social">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 FBP Platform. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="fbp_processor.js"></script>
+    <script src="mophong.js"></script>
+  </body>
+</html>

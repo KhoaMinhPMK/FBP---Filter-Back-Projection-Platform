@@ -1,0 +1,55 @@
+/**
+ * Global font stack
+ * Use a single, readable sans-serif family across the entire site.
+ */
+@font-face {
+  font-family: 'Arima Madurai';
+  src: url('./arima-madurai.medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-base: 'Arima Madurai', Arial, sans-serif;
+  --font-display: 'Arima Madurai', Arial, sans-serif;
+}
+
+html,
+body {
+  font-family: var(--font-base);
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+}
+
+button,
+input,
+textarea,
+select,
+option {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+}

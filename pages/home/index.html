@@ -1,0 +1,576 @@
+﻿<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FBP - Filter Back-Projection Platform</title>
+    <!-- Custom Font -->
+    <link rel="stylesheet" href="../../assets/global-fonts.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="../../components/buttons.css" />
+    <link rel="stylesheet" href="../../components/header.css" />
+    <link rel="stylesheet" href="../../components/footer.css" />
+    <link rel="stylesheet" href="../../components/cards.css" />
+    <!-- Page Styles -->
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <!-- Dynamic Island Header -->
+    <header class="dynamic-header" id="header">
+      <div class="header-container">
+        <div class="header-brand">
+          <svg class="header-logo" viewBox="0 0 40 40" width="36" height="36">
+            <defs>
+              <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18" fill="url(#logoGradient)"/>
+            <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="header-title">FBP</span>
+        </div>
+        <nav class="header-nav center-nav" id="mainNav">
+           <a href="../home/index.html" class="nav-link active">
+             <i class="fas fa-home"></i>
+             <span>Trang chủ</span>
+           </a>
+           <a href="../mophong/index.html" class="nav-link">
+             <i class="fas fa-flask"></i>
+             <span>Mô phỏng</span>
+           </a>
+           <a href="../chatbot/index.html" class="nav-link">
+             <i class="fas fa-comments"></i>
+             <span>Chatbot</span>
+           </a>
+        </nav>
+        <div class="header-actions right-actions">
+          <a href="#" class="nav-link secondary-action">
+            <i class="fas fa-user-plus"></i>
+            <span>Đăng ký</span>
+          </a>
+          <a href="#" class="nav-link primary-action">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Đăng nhập</span>
+          </a>
+        </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-background">
+        <div class="hero-gradient"></div>
+        <div class="hero-pattern"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="badge hero-badge">
+            <i class="fas fa-rocket"></i>
+            <span>Nền tảng học tập Filter Back-Projection</span>
+          </div>
+          <h1 class="hero-title">
+            Khám phá thuật toán
+            <span class="gradient-text">Filter Back-Projection</span>
+          </h1>
+          <p class="hero-description">
+            Nền tảng học tập và mô phỏng thuật toán FBP hiện đại, giúp bạn hiểu rõ nguyên lý và ứng dụng
+            trong xử lý ảnh y tế và tái tạo hình ảnh CT scan.
+          </p>
+          <div class="hero-cta btn-group center">
+            <a href="../mophong/index.html" class="btn-primary btn-large">
+              <i class="fas fa-play-circle"></i>
+              <span>Bắt đầu mô phỏng</span>
+            </a>
+            <a href="../theory/index.html" class="btn-secondary btn-large">
+              <i class="fas fa-book-open"></i>
+              <span>Tìm hiểu thêm</span>
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <i class="fas fa-users"></i>
+              <div class="stat-content">
+                <h3>1000+</h3>
+                <p>Người dùng</p>
+              </div>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-graduation-cap"></i>
+              <div class="stat-content">
+                <h3>50+</h3>
+                <p>Bài học</p>
+              </div>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-chart-line"></i>
+              <div class="stat-content">
+                <h3>98%</h3>
+                <p>Hài lòng</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="getting-started-section" id="getting-started">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge section-badge">
+            <i class="fas fa-rocket"></i>
+            Bắt đầu
+          </span>
+          <h2 class="section-title">Bắt đầu với FBP</h2>
+          <p class="section-subtitle">
+            Chỉ với 3 bước đơn giản, bạn có thể bắt đầu học tập và mô phỏng thuật toán FBP
+          </p>
+        </div>
+
+        <div class="getting-started-grid">
+          <div class="getting-started-content">
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <div class="step-icon">
+                <i class="fas fa-user-plus"></i>
+              </div>
+              <h3>Đăng ký tài khoản</h3>
+              <p>Tạo tài khoản miễn phí để truy cập đầy đủ tính năng và lưu trữ tiến trình học tập của bạn</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <div class="step-icon">
+                <i class="fas fa-book-reader"></i>
+              </div>
+              <h3>Học lý thuyết</h3>
+              <p>Tìm hiểu các khái niệm cơ bản và nâng cao về thuật toán Filter Back-Projection</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <div class="step-icon">
+                <i class="fas fa-laptop-code"></i>
+              </div>
+              <h3>Thực hành mô phỏng</h3>
+              <p>Áp dụng kiến thức vào thực tế với các công cụ mô phỏng trực quan và tương tác</p>
+            </div>
+          </div>
+
+          <div class="getting-started-visual">
+            <div class="visual-card card">
+              <div class="visual-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <h3>Học tập thông minh</h3>
+              <p>Hệ thống học tập được thiết kế dựa trên nghiên cứu khoa học về cách não bộ tiếp thu kiến thức</p>
+
+              <div class="visual-features">
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Ná»™i dung Ä‘Æ°á»£c cáº¥u trÃºc rÃµ rÃ ng</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Mô phỏng trực quan sinh động</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Bài tập thực hành đa dạng</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Theo dõi tiến trình chi tiết</span>
+                </div>
+              </div>
+
+              <a href="../mophong/index.html" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 24px;">
+                <i class="fas fa-arrow-right"></i>
+                <span>Bắt đầu ngay</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content">
+            <span class="badge section-badge">
+              <i class="fas fa-users"></i>
+              Về chúng tôi
+            </span>
+            <h2 class="section-title">Nền tảng học tập FBP hàng đầu</h2>
+            <p class="about-text">
+              FBP (Filter Back-Projection Platform) là nền tảng học tập trực tuyến chuyên sâu về thuật toán 
+              Filter Back-Projection - một trong những thuật toán quan trọng nhất trong lĩnh vực xử lý ảnh y tế.
+            </p>
+            <p class="about-text">
+              Chúng tôi cung cấp môi trường học tập tương tác, kết hợp lý thuyết và thực hành, giúp sinh viên, 
+              nghiên cứu viên và các chuyên gia y tế hiểu sâu về cơ chế hoạt động của thuật toán FBP.
+            </p>
+            
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="fas fa-award"></i>
+                </div>
+                <div class="highlight-content">
+                  <h4>Chất lượng hàng đầu</h4>
+                  <p>Nội dung được biên soạn bởi các chuyên gia</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="highlight-content">
+                  <h4>Học tập hiệu quả</h4>
+                  <p>Phương pháp giảng dạy hiện đại và tương tác</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="fas fa-headset"></i>
+                </div>
+                <div class="highlight-content">
+                  <h4>Hỗ trợ 24/7</h4>
+                  <p>Đội ngũ hỗ trợ luôn sẵn sàng giúp đỡ</p>
+                </div>
+              </div>
+            </div>
+
+            <a href="../about/index.html" class="btn-outline" style="margin-top: 32px;">
+              <i class="fas fa-info-circle"></i>
+              <span>Tìm hiểu thêm về chúng tôi</span>
+            </a>
+          </div>
+
+          <div class="about-visual">
+            <div class="about-image-wrapper">
+              <div class="card about-card">
+                <div class="card-icon">
+                  <i class="fas fa-microscope"></i>
+                </div>
+                <h3>Nghiên cứu khoa học</h3>
+                <p>Ứng dụng trong y học và nghiên cứu</p>
+              </div>
+              <div class="card about-card">
+                <div class="card-icon">
+                  <i class="fas fa-code"></i>
+                </div>
+                <h3>Công nghệ tiên tiến</h3>
+                <p>Nền tảng web hiện đại và tối ưu</p>
+              </div>
+              <div class="card about-card">
+                <div class="card-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Bảo mật tuyệt đối</h3>
+                <p>Dữ liệu được mã hóa và bảo vệ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Theory Section -->
+    <section class="theory-section" id="theory">
+      <div class="container">
+        <div class="section-header center">
+          <span class="badge section-badge">
+            <i class="fas fa-book"></i>
+            Kiến thức
+          </span>
+          <h2 class="section-title">Lý thuyết thuật toán FBP</h2>
+          <p class="section-subtitle">
+            Khám phá các khái niệm cơ bản và nâng cao về Filter Back-Projection
+          </p>
+        </div>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-wave-square"></i>
+            </div>
+            <h3>Radon Transform</h3>
+            <p>Tìm hiểu về phép biến đổi Radon - nền tảng toán học của thuật toán FBP</p>
+            <a href="../theory/index.html#radon" class="theory-link btn-link">
+              <span>Xem chi tiết</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-filter"></i>
+            </div>
+            <h3>Filtering</h3>
+            <p>Khám phá quá trình lọc tín hiệu và các bộ lọc được sử dụng trong FBP</p>
+            <a href="../theory/index.html#filtering" class="theory-link btn-link">
+              <span>Xem chi tiết</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-undo"></i>
+            </div>
+            <h3>Back Projection</h3>
+            <p>Hiểu rõ cơ chế chiếu ngược để tái tạo hình ảnh từ dữ liệu chiếu</p>
+            <a href="../theory/index.html#backprojection" class="theory-link btn-link">
+              <span>Xem chi tiết</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-x-ray"></i>
+            </div>
+            <h3>CT Reconstruction</h3>
+            <p>Ứng dụng FBP trong tái tạo hình ảnh CT scan trong y học</p>
+            <a href="../theory/index.html#ct" class="theory-link btn-link">
+              <span>Xem chi tiết</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h3>Thuật toán</h3>
+            <p>Phân tích chi tiết các bước thực hiện thuật toán Filter Back-Projection</p>
+            <a href="../theory/index.html#algorithm" class="theory-link btn-link">
+              <span>Xem chi tiết</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-chart-area"></i>
+            </div>
+            <h3>Phân tích hiệu suất</h3>
+            <p>Đánh giá độ chính xác và hiệu quả của thuật toán FBP</p>
+            <a href="../theory/index.html#performance" class="theory-link btn-link">
+              <span>Xem chi tiết</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="theory-cta">
+          <h3>Sẵn sàng bắt đầu học?</h3>
+          <p>Truy cập trang lý thuyết đầy đủ với hình ảnh minh họa và bài tập thực hành</p>
+          <a href="../theory/index.html" class="btn-primary btn-large">
+            <i class="fas fa-book-open"></i>
+            <span>Xem toàn bộ lý thuyết</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header center">
+          <span class="badge section-badge">
+            <i class="fas fa-star"></i>
+            Tính năng
+          </span>
+          <h2 class="section-title">Tại sao chọn FBP?</h2>
+          <p class="section-subtitle">
+            Những tính năng vượt trội giúp bạn học tập hiệu quả hơn
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-desktop"></i>
+              </div>
+              <h3>Mô phỏng trực quan</h3>
+            </div>
+            <p>Công cụ mô phỏng tương tác cho phép bạn thử nghiệm thuật toán với dữ liệu thực tế</p>
+            <a href="../mophong/index.html" class="btn-link">
+              <span>Trải nghiệm ngay</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-video"></i>
+              </div>
+              <h3>Video hướng dẫn</h3>
+            </div>
+            <p>Thư viện video chi tiết giải thích từng bước của thuật toán FBP</p>
+            <a href="../theory/index.html" class="btn-link">
+              <span>Xem video</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-tasks"></i>
+              </div>
+              <h3>Bài tập thực hành</h3>
+            </div>
+            <p>Hệ thống bài tập đa dạng giúp củng cố kiến thức và kỹ năng</p>
+            <a href="../exercises/index.html" class="btn-link">
+              <span>Làm bài tập</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3>Theo dõi tiến trình</h3>
+            </div>
+            <p>Dashboard cá nhân hiện thị chi tiết quá trình học tập của bạn</p>
+            <a href="#" class="btn-link">
+              <span>Xem dashboard</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>Cộng đồng học tập</h3>
+            </div>
+            <p>Kết nối với cộng đồng người học, chia sẻ kiến thức và kinh nghiệm</p>
+            <a href="#" class="btn-link">
+              <span>Tham gia cộng đồng</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <h3>Chứng chỉ hoàn thành</h3>
+            </div>
+            <p>Nhận chứng chỉ sau khi hoàn thành khóa học để chứng minh năng lực</p>
+            <a href="#" class="btn-link">
+              <span>Xem chứng chỉ</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-brand">
+              <svg class="footer-logo" viewBox="0 0 40 40" width="40" height="40">
+                <defs>
+                  <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+                <circle cx="20" cy="20" r="18" fill="url(#footerGradient)"/>
+                <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+              <span>FBP</span>
+            </div>
+            <p class="footer-desc">
+              Nền tảng học tập thuật toán Filter Back-Projection chuyên nghiệp và hiệu quả.
+            </p>
+            <div class="footer-social">
+              <a href="#" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Sản phẩm</h4>
+            <ul class="footer-links">
+              <li><a href="index.html"><i class="fas fa-angle-right"></i> Trang chủ</a></li>
+              <li><a href="../theory/index.html"><i class="fas fa-angle-right"></i> Lý thuyết</a></li>
+              <li><a href="../mophong/index.html"><i class="fas fa-angle-right"></i> Mô phỏng</a></li>
+              <li><a href="../exercises/index.html"><i class="fas fa-angle-right"></i> Bài tập</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Hỗ trợ</h4>
+            <ul class="footer-links">
+              <li><a href="#"><i class="fas fa-angle-right"></i> Trung tâm trợ giúp</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Điều khoản</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Bảo mật</a></li>
+              <li><a href="../contact/index.html"><i class="fas fa-angle-right"></i> Liên hệ</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Liên hệ</h4>
+            <ul class="footer-contact">
+              <li>
+                <i class="fas fa-envelope"></i>
+                <span>nhamy@FBP.edu.vn</span>
+              </li>
+              <li>
+                <i class="fas fa-phone"></i>
+                <span>+84 912978459</span>
+              </li>
+              <li>
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Hà Nội, Việt Nam</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 FBP. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="home.js"></script>
+  </body>
+</html>

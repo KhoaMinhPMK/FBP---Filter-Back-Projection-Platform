@@ -1,0 +1,558 @@
+﻿<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FBP - Filter Back-Projection Platform</title>
+    <!-- Custom Font -->
+    <link rel="stylesheet" href="../assets/global-fonts.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=4" />
+  </head>
+  <body>
+    <!-- Dynamic Island Header -->
+    <header class="dynamic-header" id="header">
+      <div class="header-container">
+        <div class="header-brand">
+          <svg class="header-logo" viewBox="0 0 40 40" width="36" height="36">
+            <defs>
+              <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18" fill="url(#logoGradient)"/>
+            <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="header-title">FBP</span>
+        </div>
+        
+        <nav class="header-nav" id="mainNav">
+          <a href="../pages/home/index.html" class="nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Trang chủ</span>
+          </a>
+          <a href="../pages/theory/index.html" class="nav-link">
+            <i class="fas fa-book"></i>
+            <span>Lý thuyết</span>
+          </a>
+          <a href="../pages/simulation/index.html" class="nav-link">
+            <i class="fas fa-flask"></i>
+            <span>Mô phỏng</span>
+          </a>
+          <a href="../pages/analysis/index.html" class="nav-link">
+            <i class="fas fa-chart-bar"></i>
+            <span>Phân tích</span>
+          </a>
+          <a href="../pages/chatbot/index.html" class="nav-link">
+            <i class="fas fa-comments"></i>
+            <span>Chatbot</span>
+          </a>
+        </nav>
+            </a>
+          </nav>
+
+        <div class="header-actions">
+          <a class="btn-auth btn-login" href="../pages/auth/index.html#login">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>ÄÄƒng nháº­p</span>
+          </a>
+          <a class="btn-auth btn-register" href="../pages/auth/index.html#register">
+            <i class="fas fa-user-plus"></i>
+            <span>ÄÄƒng kÃ½</span>
+          </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-background">
+        <div class="hero-gradient"></div>
+        <div class="hero-pattern"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fas fa-rocket"></i>
+            <span>Ná»n táº£ng há»c táº­p Filter Back-Projection</span>
+          </div>
+          <h1 class="hero-title">
+            KhÃ¡m phÃ¡ thuáº­t toÃ¡n
+            <span class="gradient-text">Filter Back-Projection</span>
+          </h1>
+          <p class="hero-description">
+            Ná»n táº£ng há»c táº­p vÃ  mÃ´ phá»ng thuáº­t toÃ¡n FBP hiá»‡n Ä‘áº¡i, giÃºp báº¡n hiá»ƒu rÃµ nguyÃªn lÃ½ vÃ  á»©ng dá»¥ng 
+            trong xá»­ lÃ½ áº£nh y táº¿ vÃ  tÃ¡i táº¡o hÃ¬nh áº£nh CT scan.
+          </p>
+          <div class="hero-cta">
+            <button class="btn-primary btn-large">
+              <i class="fas fa-play-circle"></i>
+              <span>Báº¯t Ä‘áº§u ngay</span>
+            </button>
+            <button class="btn-secondary btn-large">
+              <i class="fas fa-book-open"></i>
+              <span>TÃ¬m hiá»ƒu thÃªm</span>
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <i class="fas fa-users"></i>
+              <div class="stat-content">
+                <h3>1000+</h3>
+                <p>NgÆ°á»i dÃ¹ng</p>
+              </div>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-graduation-cap"></i>
+              <div class="stat-content">
+                <h3>50+</h3>
+                <p>BÃ i há»c</p>
+              </div>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-chart-line"></i>
+              <div class="stat-content">
+                <h3>98%</h3>
+                <p>HÃ i lÃ²ng</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="getting-started-section" id="getting-started">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">
+            <i class="fas fa-rocket"></i>
+            Báº¯t Ä‘áº§u
+          </span>
+          <h2 class="section-title">Báº¯t Ä‘áº§u vá»›i FBP</h2>
+          <p class="section-subtitle">
+            Chá»‰ vá»›i 3 bÆ°á»›c Ä‘Æ¡n giáº£n, báº¡n cÃ³ thá»ƒ báº¯t Ä‘áº§u há»c táº­p vÃ  mÃ´ phá»ng thuáº­t toÃ¡n FBP
+          </p>
+        </div>
+
+        <div class="getting-started-grid">
+          <div class="getting-started-content">
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <div class="step-icon">
+                <i class="fas fa-user-plus"></i>
+              </div>
+              <h3>ÄÄƒng kÃ½ tÃ i khoáº£n</h3>
+              <p>Táº¡o tÃ i khoáº£n miá»…n phÃ­ Ä‘á»ƒ truy cáº­p Ä‘áº§y Ä‘á»§ tÃ­nh nÄƒng vÃ  lÆ°u trá»¯ tiáº¿n trÃ¬nh há»c táº­p cá»§a báº¡n</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <div class="step-icon">
+                <i class="fas fa-book-reader"></i>
+              </div>
+              <h3>Há»c lÃ½ thuyáº¿t</h3>
+              <p>TÃ¬m hiá»ƒu cÃ¡c khÃ¡i niá»‡m cÆ¡ báº£n vÃ  nÃ¢ng cao vá» thuáº­t toÃ¡n Filter Back-Projection</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <div class="step-icon">
+                <i class="fas fa-laptop-code"></i>
+              </div>
+              <h3>Thá»±c hÃ nh mÃ´ phá»ng</h3>
+              <p>Ãp dá»¥ng kiáº¿n thá»©c vÃ o thá»±c táº¿ vá»›i cÃ¡c cÃ´ng cá»¥ mÃ´ phá»ng trá»±c quan vÃ  tÆ°Æ¡ng tÃ¡c</p>
+            </div>
+          </div>
+
+          <div class="getting-started-visual">
+            <div class="visual-card">
+              <div class="visual-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <h3>Há»c táº­p thÃ´ng minh</h3>
+              <p>Há»‡ thá»‘ng há»c táº­p Ä‘Æ°á»£c thiáº¿t káº¿ dá»±a trÃªn nghiÃªn cá»©u khoa há»c vá» cÃ¡ch nÃ£o bá»™ tiáº¿p thu kiáº¿n thá»©c</p>
+              
+              <div class="visual-features">
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Ná»™i dung Ä‘Æ°á»£c cáº¥u trÃºc rÃµ rÃ ng</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>MÃ´ phá»ng trá»±c quan sinh Ä‘á»™ng</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>BÃ i táº­p thá»±c hÃ nh Ä‘a dáº¡ng</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Theo dÃµi tiáº¿n trÃ¬nh chi tiáº¿t</span>
+                </div>
+              </div>
+
+              <button class="btn-start">
+                <i class="fas fa-arrow-right"></i>
+                <span>Báº¯t Ä‘áº§u ngay</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content">
+            <span class="section-badge">
+              <i class="fas fa-users"></i>
+              Vá» chÃºng tÃ´i
+            </span>
+            <h2 style="font-weight: 500;" class="section-title">Ná»n táº£ng há»c táº­p FBP hÃ ng Ä‘áº§u</h2>
+            <p class="about-text">
+              FBP (Filter Back-Projection Platform) lÃ  ná»n táº£ng há»c táº­p trá»±c tuyáº¿n chuyÃªn sÃ¢u vá» thuáº­t toÃ¡n 
+              Filter Back-Projection - má»™t trong nhá»¯ng thuáº­t toÃ¡n quan trá»ng nháº¥t trong lÄ©nh vá»±c xá»­ lÃ½ áº£nh y táº¿.
+            </p>
+            <p class="about-text">
+              ChÃºng tÃ´i cung cáº¥p mÃ´i trÆ°á»ng há»c táº­p tÆ°Æ¡ng tÃ¡c, káº¿t há»£p lÃ½ thuyáº¿t vÃ  thá»±c hÃ nh, giÃºp sinh viÃªn, 
+              nghiÃªn cá»©u viÃªn vÃ  cÃ¡c chuyÃªn gia y táº¿ hiá»ƒu sÃ¢u vá» cÆ¡ cháº¿ hoáº¡t Ä‘á»™ng cá»§a thuáº­t toÃ¡n FBP.
+            </p>
+            
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="fas fa-award"></i>
+                </div>
+                <div class="highlight-content">
+                  <h4>Cháº¥t lÆ°á»£ng hÃ ng Ä‘áº§u</h4>
+                  <p>Ná»™i dung Ä‘Æ°á»£c biÃªn soáº¡n bá»Ÿi cÃ¡c chuyÃªn gia</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="highlight-content">
+                  <h4>Há»c táº­p hiá»‡u quáº£</h4>
+                  <p>PhÆ°Æ¡ng phÃ¡p giáº£ng dáº¡y hiá»‡n Ä‘áº¡i vÃ  tÆ°Æ¡ng tÃ¡c</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">
+                  <i class="fas fa-headset"></i>
+                </div>
+                <div class="highlight-content">
+                  <h4>Há»— trá»£ 24/7</h4>
+                  <p>Äá»™i ngÅ© há»— trá»£ luÃ´n sáºµn sÃ ng giÃºp Ä‘á»¡</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-visual">
+            <div class="about-image-wrapper">
+              <div class="about-card">
+                <div class="card-icon">
+                  <i class="fas fa-microscope"></i>
+                </div>
+                <h3>NghiÃªn cá»©u khoa há»c</h3>
+                <p>á»¨ng dá»¥ng trong y há»c vÃ  nghiÃªn cá»©u</p>
+              </div>
+              <div class="about-card">
+                <div class="card-icon">
+                  <i class="fas fa-code"></i>
+                </div>
+                <h3>CÃ´ng nghá»‡ tiÃªn tiáº¿n</h3>
+                <p>Ná»n táº£ng web hiá»‡n Ä‘áº¡i vÃ  tá»‘i Æ°u</p>
+              </div>
+              <div class="about-card">
+                <div class="card-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Báº£o máº­t tuyá»‡t Ä‘á»‘i</h3>
+                <p>Dá»¯ liá»‡u Ä‘Æ°á»£c mÃ£ hÃ³a vÃ  báº£o vá»‡</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Theory Section -->
+    <section class="theory-section" id="theory">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-badge">
+            <i class="fas fa-book"></i>
+            Kiáº¿n thá»©c
+          </span>
+          <h2 class="section-title">LÃ½ thuyáº¿t thuáº­t toÃ¡n FBP</h2>
+          <p class="section-subtitle">
+            KhÃ¡m phÃ¡ cÃ¡c khÃ¡i niá»‡m cÆ¡ báº£n vÃ  nÃ¢ng cao vá» Filter Back-Projection
+          </p>
+        </div>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-wave-square"></i>
+            </div>
+            <h3>Radon Transform</h3>
+            <p>TÃ¬m hiá»ƒu vá» phÃ©p biáº¿n Ä‘á»•i Radon - ná»n táº£ng toÃ¡n há»c cá»§a thuáº­t toÃ¡n FBP</p>
+            <a href="theory.html#radon" class="theory-link">
+              <span>Xem chi tiáº¿t</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-filter"></i>
+            </div>
+            <h3>Filtering</h3>
+            <p>KhÃ¡m phÃ¡ quÃ¡ trÃ¬nh lá»c tÃ­n hiá»‡u vÃ  cÃ¡c bá»™ lá»c Ä‘Æ°á»£c sá»­ dá»¥ng trong FBP</p>
+            <a href="theory.html#filtering" class="theory-link">
+              <span>Xem chi tiáº¿t</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-undo"></i>
+            </div>
+            <h3>Back Projection</h3>
+            <p>Hiá»ƒu rÃµ cÆ¡ cháº¿ chiáº¿u ngÆ°á»£c Ä‘á»ƒ tÃ¡i táº¡o hÃ¬nh áº£nh tá»« dá»¯ liá»‡u chiáº¿u</p>
+            <a href="theory.html#backprojection" class="theory-link">
+              <span>Xem chi tiáº¿t</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-x-ray"></i>
+            </div>
+            <h3>CT Reconstruction</h3>
+            <p>á»¨ng dá»¥ng FBP trong tÃ¡i táº¡o hÃ¬nh áº£nh CT scan trong y há»c</p>
+            <a href="theory.html#ct" class="theory-link">
+              <span>Xem chi tiáº¿t</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h3>Thuáº­t toÃ¡n</h3>
+            <p>PhÃ¢n tÃ­ch chi tiáº¿t cÃ¡c bÆ°á»›c thá»±c hiá»‡n thuáº­t toÃ¡n Filter Back-Projection</p>
+            <a href="theory.html#algorithm" class="theory-link">
+              <span>Xem chi tiáº¿t</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="theory-card">
+            <div class="theory-icon">
+              <i class="fas fa-chart-area"></i>
+            </div>
+            <h3>PhÃ¢n tÃ­ch hiá»‡u suáº¥t</h3>
+            <p>ÄÃ¡nh giÃ¡ Ä‘á»™ chÃ­nh xÃ¡c vÃ  hiá»‡u quáº£ cá»§a thuáº­t toÃ¡n FBP</p>
+            <a href="theory.html#performance" class="theory-link">
+              <span>Xem chi tiáº¿t</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="theory-cta">
+          <h3>Sáºµn sÃ ng báº¯t Ä‘áº§u há»c?</h3>
+          <p>Truy cáº­p trang lÃ½ thuyáº¿t Ä‘áº§y Ä‘á»§ vá»›i hÃ¬nh áº£nh minh há»a vÃ  bÃ i táº­p thá»±c hÃ nh</p>
+          <a href="theory.html" class="btn-primary btn-large">
+            <i class="fas fa-book-open"></i>
+            <span>Xem toÃ n bá»™ lÃ½ thuyáº¿t</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-badge">
+            <i class="fas fa-star"></i>
+            TÃ­nh nÄƒng
+          </span>
+          <h2 class="section-title">Táº¡i sao chá»n FBP?</h2>
+          <p class="section-subtitle">
+            Nhá»¯ng tÃ­nh nÄƒng vÆ°á»£t trá»™i giÃºp báº¡n há»c táº­p hiá»‡u quáº£ hÆ¡n
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-desktop"></i>
+              </div>
+              <h3>MÃ´ phá»ng trá»±c quan</h3>
+            </div>
+            <p>CÃ´ng cá»¥ mÃ´ phá»ng tÆ°Æ¡ng tÃ¡c cho phÃ©p báº¡n thá»­ nghiá»‡m thuáº­t toÃ¡n vá»›i dá»¯ liá»‡u thá»±c táº¿</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-video"></i>
+              </div>
+              <h3>Video hÆ°á»›ng dáº«n</h3>
+            </div>
+            <p>ThÆ° viá»‡n video chi tiáº¿t giáº£i thÃ­ch tá»«ng bÆ°á»›c cá»§a thuáº­t toÃ¡n FBP</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-tasks"></i>
+              </div>
+              <h3>BÃ i táº­p thá»±c hÃ nh</h3>
+            </div>
+            <p>Há»‡ thá»‘ng bÃ i táº­p Ä‘a dáº¡ng giÃºp cá»§ng cá»‘ kiáº¿n thá»©c vÃ  ká»¹ nÄƒng</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3>Theo dÃµi tiáº¿n trÃ¬nh</h3>
+            </div>
+            <p>Dashboard cÃ¡ nhÃ¢n hiá»ƒn thá»‹ chi tiáº¿t quÃ¡ trÃ¬nh há»c táº­p cá»§a báº¡n</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>Cá»™ng Ä‘á»“ng há»c táº­p</h3>
+            </div>
+            <p>Káº¿t ná»‘i vá»›i cá»™ng Ä‘á»“ng ngÆ°á»i há»c, chia sáº» kiáº¿n thá»©c vÃ  kinh nghiá»‡m</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <h3>Chá»©ng chá»‰ hoÃ n thÃ nh</h3>
+            </div>
+            <p>Nháº­n chá»©ng chá»‰ sau khi hoÃ n thÃ nh khÃ³a há»c Ä‘á»ƒ chá»©ng minh nÄƒng lá»±c</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-brand">
+              <svg class="footer-logo" viewBox="0 0 40 40" width="40" height="40">
+                <defs>
+                  <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+                <circle cx="20" cy="20" r="18" fill="url(#footerGradient)"/>
+                <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+              <span>FBP</span>
+            </div>
+            <p class="footer-desc">
+              Ná»n táº£ng há»c táº­p thuáº­t toÃ¡n Filter Back-Projection chuyÃªn nghiá»‡p vÃ  hiá»‡u quáº£.
+            </p>
+            <div class="footer-social">
+              <a href="#" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Sáº£n pháº©m</h4>
+            <ul class="footer-links">
+              <li><a href="#"><i class="fas fa-angle-right"></i> Trang chá»§</a></li>
+              <li><a href="theory.html"><i class="fas fa-angle-right"></i> LÃ½ thuyáº¿t</a></li>
+              <li><a href="mophong.html"><i class="fas fa-angle-right"></i> MÃ´ phá»ng</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> BÃ i táº­p</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Há»— trá»£</h4>
+            <ul class="footer-links">
+              <li><a href="#"><i class="fas fa-angle-right"></i> Trung tÃ¢m trá»£ giÃºp</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Äiá»u khoáº£n</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> Báº£o máº­t</a></li>
+              <li><a href="#"><i class="fas fa-angle-right"></i> LiÃªn há»‡</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>LiÃªn há»‡</h4>
+            <ul class="footer-contact">
+              <li>
+                <i class="fas fa-envelope"></i>
+                <span>contact@FBP.edu.vn</span>
+              </li>
+              <li>
+                <i class="fas fa-phone"></i>
+                <span>+84 123 456 789</span>
+              </li>
+              <li>
+                <i class="fas fa-map-marker-alt"></i>
+                <span>HÃ  Ná»™i, Viá»‡t Nam</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 FBP. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="main.js?v=4"></script>
+  </body>
+  </html>

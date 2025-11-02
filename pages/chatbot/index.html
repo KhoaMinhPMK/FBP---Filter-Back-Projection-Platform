@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot - FBP</title>
+  <link rel="stylesheet" href="../../assets/global-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../../components/buttons.css" />
+  <link rel="stylesheet" href="../../components/header.css" />
+  <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="dynamic-header" id="header">
+    <div class="header-container">
+      <div class="header-brand">
+        <svg class="header-logo" viewBox="0 0 40 40" width="36" height="36">
+          <defs>
+            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <circle cx="20" cy="20" r="18" fill="url(#logoGradient)"/>
+          <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="header-title">FBP</span>
+      </div>
+      <nav class="header-nav" id="mainNav">
+        <a href="../home/index.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          <span>Trang chủ</span>
+        </a>
+        <a href="../theory/index.html" class="nav-link">
+          <i class="fas fa-book"></i>
+          <span>Lý thuyết</span>
+        </a>
+        <a href="../mophong/index.html" class="nav-link">
+          <i class="fas fa-flask"></i>
+          <span>Mô phỏng</span>
+        </a>
+        <a href="../analysis/index.html" class="nav-link">
+          <i class="fas fa-chart-bar"></i>
+          <span>Phân tích</span>
+        </a>
+        <a href="../chatbot/index.html" class="nav-link active">
+          <i class="fas fa-comments"></i>
+          <span>Chatbot</span>
+        </a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn-auth btn-login" href="../auth/index.html#login">
+          <i class="fas fa-sign-in-alt"></i>
+          <span>Đăng nhập</span>
+        </a>
+        <a class="btn-auth btn-register" href="../auth/index.html#register">
+          <i class="fas fa-user-plus"></i>
+          <span>Đăng ký</span>
+        </a>
+      </div>
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="chatbot-container">
+      <!-- Chat Messages -->
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">
+          <div class="message-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="message-content">
+            <p>Xin chào! 👋 Tôi là chatbot FBP. Tôi có thể giúp bạn với các câu hỏi về thuật toán Filter Back-Projection, phân tích ảnh y tế, và các tính năng của platform này. Bạn cần tư vấn gì?</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Input -->
+      <div class="chat-input-area">
+        <form id="chatForm" class="chat-input-form">
+          <input 
+            type="text" 
+            id="messageInput" 
+            class="chat-input" 
+            placeholder="Nháº­p cÃ¢u há»i cá»§a báº¡n..." 
+            autocomplete="off"
+            required
+          >
+          <button type="submit" class="send-btn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>
+

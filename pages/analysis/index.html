@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhÃ¢n tÃ­ch khá»‘i u - YOLO</title>
+  <link rel="stylesheet" href="../../assets/global-fonts.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../../components/buttons.css" />
+  <link rel="stylesheet" href="../../components/header.css" />
+  <link rel="stylesheet" href="analysis.css">
+</head>
+<body>
+    <!-- Dynamic Island Header -->
+    <header class="dynamic-header" id="header">
+      <div class="header-container">
+        <div class="header-brand">
+          <svg class="header-logo" viewBox="0 0 40 40" width="36" height="36">
+            <defs>
+              <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18" fill="url(#logoGradient)"/>
+            <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="header-title">FBP</span>
+        </div>
+        <nav class="header-nav" id="mainNav">
+          <a href="../home/index.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Trang chủ</span>
+          </a>
+          <a href="../theory/index.html" class="nav-link">
+            <i class="fas fa-book"></i>
+            <span>Lý thuyết</span>
+          </a>
+          <a href="../mophong/index.html" class="nav-link">
+            <i class="fas fa-flask"></i>
+            <span>Mô phỏng</span>
+          </a>
+          <a href="../analysis/index.html" class="nav-link active">
+            <i class="fas fa-chart-bar"></i>
+            <span>Phân tích</span>
+          </a>
+          <a href="../chatbot/index.html" class="nav-link">
+            <i class="fas fa-comments"></i>
+            <span>Chatbot</span>
+          </a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn-auth btn-login" href="../auth/index.html#login">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Đăng nhập</span>
+          </a>
+          <a class="btn-auth btn-register" href="../auth/index.html#register">
+            <i class="fas fa-user-plus"></i>
+            <span>Đăng ký</span>
+          </a>
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+  <main style="padding-top: 10%;">
+    <div class="analysis-grid">
+      <div class="analysis-left">
+        <h2>Thông tin bệnh nhân</h2>
+        <form id="patient-form">
+          <label for="patient-name">Họ và tên bệnh nhân:</label>
+          <input type="text" id="patient-name" name="patient-name" placeholder="Nhập họ tên..." required>
+        </form>
+        <h2>Upload ảnh DICOM</h2>
+        <div class="upload-box" onclick="document.getElementById('image-upload').click()">
+          <span class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+          <label for="image-upload">Chọn hoặc kéo thả ảnh DICOM (PNG/JPG)</label>
+          <input type="file" id="image-upload" multiple accept="image/png,image/jpeg">
+        </div>
+        <button id="analyze-btn">Phân tích & Xuất video</button>
+        <div id="upload-info"></div>
+      </div>
+      <div class="analysis-right">
+        <h2>Video kết quả</h2>
+        <div id="result-video" class="video-box">
+          <!-- Video sẽ xuất hiện ở đây -->
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="analysis.js"></script>
+</body>
+</html>
+
