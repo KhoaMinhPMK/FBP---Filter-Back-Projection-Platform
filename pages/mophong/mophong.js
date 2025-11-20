@@ -150,8 +150,8 @@ function handleFileSelect(file) {
     img.onload = () => {
       currentImage = img;
       displayImagePreview(img, file.name);
-      drawImageToCanvas(img, 'originalCanvas');
-      hideCanvasOverlay();
+      drawImageToCanvas(img, 'largeOriginalCanvas');
+      hideImagePlaceholder('originalPlaceholder');
       showNotification('Tải file thành công!', 'success');
     };
     img.src = e.target.result;
@@ -229,7 +229,8 @@ function initWebcam() {
         const img = new Image();
         img.onload = () => {
           currentImage = img;
-          drawImageToCanvas(img, 'originalCanvas');
+          drawImageToCanvas(img, 'largeOriginalCanvas');
+          hideImagePlaceholder('originalPlaceholder');
           hideCanvasOverlay();
           showNotification('Chụp ảnh thành công!', 'success');
         };
@@ -257,7 +258,8 @@ function initPhantom() {
     
     const phantom = generatePhantom(phantomType, size);
     currentImage = phantom;
-    drawImageToCanvas(phantom, 'originalCanvas');
+    drawImageToCanvas(phantom, 'largeOriginalCanvas');
+    hideImagePlaceholder('originalPlaceholder');
     hideCanvasOverlay();
     showNotification(`Phantom ${phantomType} đã được tạo`, 'success');
   });
@@ -451,7 +453,8 @@ async function runSimulation() {
     // Step 4: Back-Projection
     await processStep(4, 'Back-projecting...', async () => {
       reconstructedImage = await backProject(sinogramData);
-      drawImageToCanvas(reconstructedImage, 'reconstructedCanvas');
+      drawImageToCanvas(reconstructedImage, 'largeReconstructedCanvas');
+      hideImagePlaceholder('reconstructedPlaceholder');
       await sleep(1000);
     });
     
@@ -528,8 +531,13 @@ function resetAll() {
   updateTime(0);
   
   // Clear canvases
-  ['originalCanvas', 'reconstructedCanvas', 'sinogramCanvas'].forEach(id => {
+  ['largeOriginalCanvas', 'largeReconstructedCanvas', 'largeSinogramCanvas'].forEach(id => {
     clearCanvas(id);
+  });
+  
+  // Show all placeholders
+  ['originalPlaceholder', 'sinogramPlaceholder', 'reconstructedPlaceholder'].forEach(id => {
+    showImagePlaceholder(id);
   });
   
   // Reset timeline
@@ -553,39 +561,14 @@ function resetAll() {
 // CANVAS
 // ============================================
 function initCanvas() {
-  const canvas = $('#mainCanvas');
-  if (!canvas) return;
-  
-  const ctx = canvas.getContext('2d');
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-  
-  // Draw grid
-  ctx.strokeStyle = 'rgba(102, 126, 234, 0.2)';
-  ctx.lineWidth = 1;
-  
-  for (let i = 0; i < canvas.width; i += 50) {
-    ctx.beginPath();
-    ctx.moveTo(i, 0);
-    ctx.lineTo(i, canvas.height);
-    ctx.stroke();
-  }
-  
-  for (let i = 0; i < canvas.height; i += 50) {
-    ctx.beginPath();
-    ctx.moveTo(0, i);
-    ctx.lineTo(canvas.width, i);
-    ctx.stroke();
-  }
-  
-  // Fullscreen button
+  // Fullscreen button for results display
   const fullscreenBtn = $('#fullscreenBtn');
-  const canvasWrapper = $('#canvasWrapper');
+  const resultsDisplay = $('.results-display-area');
   
-  if (fullscreenBtn && canvasWrapper) {
+  if (fullscreenBtn && resultsDisplay) {
     fullscreenBtn.addEventListener('click', () => {
       if (!document.fullscreenElement) {
-        canvasWrapper.requestFullscreen();
+        resultsDisplay.requestFullscreen();
         fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
       } else {
         document.exitFullscreen();
@@ -604,6 +587,9 @@ function drawImageToCanvas(img, canvasId) {
   
   const ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0);
+  
+  // Show canvas and hide placeholder
+  canvas.classList.add('active');
 }
 
 function clearCanvas(canvasId) {
@@ -613,6 +599,23 @@ function clearCanvas(canvasId) {
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = '#0a0e1a';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Hide canvas
+  canvas.classList.remove('active');
+}
+
+function hideImagePlaceholder(placeholderId) {
+  const placeholder = $('#' + placeholderId);
+  if (placeholder) {
+    placeholder.classList.add('hidden');
+  }
+}
+
+function showImagePlaceholder(placeholderId) {
+  const placeholder = $('#' + placeholderId);
+  if (placeholder) {
+    placeholder.classList.remove('hidden');
+  }
 }
 
 function hideCanvasOverlay() {
@@ -668,7 +671,7 @@ async function createSinogram(img) {
  * Draw sinogram result to canvas
  */
 function drawSinogram(sinogramResult) {
-  const canvas = $('#sinogramCanvas');
+  const canvas = $('#largeSinogramCanvas');
   if (!canvas || !sinogramResult) return;
   
   // Set canvas size
@@ -691,6 +694,10 @@ function drawSinogram(sinogramResult) {
   }
   
   ctx.putImageData(imageData, 0, 0);
+  
+  // Show canvas and hide placeholder
+  canvas.classList.add('active');
+  hideImagePlaceholder('sinogramPlaceholder');
 }
 
 /**
@@ -766,6 +773,21 @@ function calculateMetrics(original, reconstructed) {
 function displayMetrics(metrics) {
   $('#psnrValue').textContent = metrics.psnr;
   $('#ssimValue').textContent = metrics.ssim;
+  
+  // Update processing info
+  const numProjections = $('#numProjections');
+  const filterType = $('#filterType');
+  const imageSize = $('#imageSize');
+  
+  if (numProjections) {
+    $('#infoProjections').textContent = numProjections.value;
+  }
+  if (filterType) {
+    $('#infoFilter').textContent = filterType.options[filterType.selectedIndex].text;
+  }
+  if (imageSize && currentImage) {
+    $('#infoSize').textContent = imageSize.value + '×' + imageSize.value + 'px';
+  }
 }
 
 // ============================================

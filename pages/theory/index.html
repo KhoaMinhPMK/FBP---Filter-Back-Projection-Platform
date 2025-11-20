@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lý thuyết FBP - Filter Back-Projection Platform</title>
+    <link rel="stylesheet" href="../../assets/global-fonts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../../components/buttons.css" />
+    <link rel="stylesheet" href="../../components/header.css" />
+    <link rel="stylesheet" href="../../components/footer.css" />
+    <link rel="stylesheet" href="theory.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="dynamic-header" id="header">
+      <div class="header-container">
+        <a href="../home/index.html" class="header-brand">
+          <svg class="logo" viewBox="0 0 40 40" width="40" height="40">
+            <defs>
+              <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18" fill="url(#logoGradient)"/>
+            <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="brand-text">FBP</span>
+        </a>
+
+        <nav class="header-nav" id="mainNav">
+          <a href="../home/index.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Trang chủ</span>
+          </a>
+          <a href="../theory/index.html" class="nav-link active">
+            <i class="fas fa-book"></i>
+            <span>Lý thuyết</span>
+          </a>
+          <a href="../mophong/index.html" class="nav-link">
+            <i class="fas fa-cube"></i>
+            <span>Mô phỏng 3D</span>
+          </a>
+          <a href="../analysis/index.html" class="nav-link">
+            <i class="fas fa-chart-bar"></i>
+            <span>Phân tích</span>
+          </a>
+          <a href="../chatbot/index.html" class="nav-link">
+            <i class="fas fa-comments"></i>
+            <span>Chatbot</span>
+          </a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn-auth btn-login" href="../auth/index.html#login">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Đăng nhập</span>
+          </a>
+          <a class="btn-auth btn-register" href="../auth/index.html#register">
+            <i class="fas fa-user-plus"></i>
+            <span>Đăng ký</span>
+          </a>
+          <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <span class="badge">
+            <i class="fas fa-book-open"></i>
+            Kiến thức cơ bản
+          </span>
+          <h1 class="hero-title">
+            Lý thuyết FBP
+            <span class="gradient-text">Filter Back-Projection</span>
+          </h1>
+          <p class="hero-subtitle">
+            Hiểu rõ nguyên lý hoạt động của thuật toán Filter Back-Projection 
+            trong xử lý ảnh y khoa và tái tạo hình ảnh từ CT scan
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="content-section">
+      <div class="container">
+        
+        <!-- Navigation Sidebar -->
+        <aside class="sidebar-nav">
+          <h3>Nội dung</h3>
+          <nav class="toc">
+            <a href="#intro" class="toc-link active">Giới thiệu</a>
+            <a href="#overview" class="toc-link">Tổng quan FBP</a>
+            <a href="#radon" class="toc-link">Biến đổi Radon</a>
+            <a href="#steps" class="toc-link">Các bước thực hiện</a>
+            <a href="#filtering" class="toc-link">Filtering (Lọc)</a>
+            <a href="#backprojection" class="toc-link">Back-Projection</a>
+            <a href="#applications" class="toc-link">Ứng dụng</a>
+            <a href="#advantages" class="toc-link">Ưu & Nhược điểm</a>
+          </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="theory-content">
+          
+          <!-- Giới thiệu -->
+          <article id="intro" class="content-card">
+            <div class="card-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h2>Giới thiệu về FBP</h2>
+            <p>
+              <strong>Filter Back-Projection (FBP)</strong> là một thuật toán cơ bản và quan trọng nhất trong 
+              lĩnh vực tái tạo hình ảnh y khoa, đặc biệt là trong công nghệ chụp cắt lớp vi tính (CT - Computed Tomography).
+            </p>
+            <p>
+              Thuật toán này giúp chúng ta tạo ra hình ảnh 2D hoặc 3D của nội bộ cơ thể từ các dữ liệu 
+              được thu thập bởi máy CT scanner, mà không cần phẫu thuật xâm lấn.
+            </p>
+            <div class="highlight-box info">
+              <i class="fas fa-info-circle"></i>
+              <p>
+                FBP được phát triển vào những năm 1960-1970 và trở thành nền tảng cho sự phát triển 
+                của công nghệ hình ảnh y khoa hiện đại.
+              </p>
+            </div>
+          </article>
+
+          <!-- Tổng quan -->
+          <article id="overview" class="content-card">
+            <div class="card-icon">
+              <i class="fas fa-eye"></i>
+            </div>
+            <h2>Tổng quan về Filter Back-Projection</h2>
+            <h3>FBP là gì?</h3>
+            <p>
+              FBP là phương pháp tái tạo hình ảnh từ các phép đo chiếu (projections). 
+              Khi tia X đi qua cơ thể người, nó bị hấp thụ với mức độ khác nhau tùy thuộc vào 
+              mật độ của các mô. Máy CT thu thập các phép đo này từ nhiều góc độ khác nhau.
+            </p>
+            <h3>Ý tưởng cốt lõi</h3>
+            <ul class="feature-list">
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <div>
+                  <strong>Chiếu (Projection):</strong> Thu thập dữ liệu từ nhiều góc độ xung quanh đối tượng
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <div>
+                  <strong>Lọc (Filtering):</strong> Làm sắc nét dữ liệu chiếu để giảm nhiễu
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <div>
+                  <strong>Chiếu ngược (Back-Projection):</strong> Tái tạo lại hình ảnh từ dữ liệu đã lọc
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Radon Transform -->
+          <article id="radon" class="content-card">
+            <div class="card-icon">
+              <i class="fas fa-wave-square"></i>
+            </div>
+            <h2>Biến đổi Radon (Radon Transform)</h2>
+            <p>
+              <strong>Biến đổi Radon</strong> là nền tảng toán học của quá trình thu thập dữ liệu trong CT scan. 
+              Nó mô tả cách các tia X đi qua vật thể và tạo ra các "projection" (hình chiếu).
+            </p>
+            <h3>Sinogram là gì?</h3>
+            <p>
+              Kết quả của biến đổi Radon được gọi là <strong>Sinogram</strong> - một hình ảnh 2D đặc biệt trong đó:
+            </p>
+            <ul class="feature-list">
+              <li>
+                <i class="fas fa-angle-right"></i>
+                <div>
+                  Trục ngang (horizontal): Vị trí của detector (máy dò)
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-angle-right"></i>
+                <div>
+                  Trục dọc (vertical): Góc chiếu (từ 0° đến 180° hoặc 360°)
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-angle-right"></i>
+                <div>
+                  Giá trị pixel: Mức độ hấp thụ tia X tại vị trí và góc đó
+                </div>
+              </li>
+            </ul>
+            <div class="highlight-box tip">
+              <i class="fas fa-brain"></i>
+              <p>
+                Tưởng tượng bạn chụp ảnh một quả táo từ nhiều góc độ khác nhau (0°, 30°, 60°, 90°...). 
+                Sinogram là cách sắp xếp tất cả các "bóng" của quả táo đó theo góc độ.
+              </p>
+            </div>
+          </article>
+
+          <!-- Các bước thực hiện -->
+          <article id="steps" class="content-card">
+            <div class="card-icon">
+              <i class="fas fa-list-ol"></i>
+            </div>
+            <h2>Các bước thực hiện FBP</h2>
+            <p>
+              Thuật toán FBP được chia thành các bước chính như sau:
+            </p>
+            
+            <div class="step-cards">
+              <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h3>Thu thập dữ liệu (Data Acquisition)</h3>
+                  <p>
+                    Máy CT quay xung quanh bệnh nhân và thu thập các phép đo từ nhiều góc độ khác nhau. 
+                    Thông thường, có thể thu thập từ 180 đến 360 projection hoặc nhiều hơn.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h3>Tạo Sinogram (Radon Transform)</h3>
+                  <p>
+                    Các phép đo được sắp xếp thành sinogram - một ma trận 2D chứa toàn bộ thông tin 
+                    về cách tia X bị hấp thụ qua vật thể ở mọi góc độ.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h3>Lọc dữ liệu (Filtering)</h3>
+                  <p>
+                    Áp dụng bộ lọc (filter) lên sinogram để làm sắc nét hình ảnh và giảm hiện tượng mờ 
+                    (blurring) xảy ra trong quá trình back-projection.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h3>Chiếu ngược (Back-Projection)</h3>
+                  <p>
+                    "Chiếu ngược" dữ liệu đã lọc từ mỗi góc độ trở lại không gian ảnh, 
+                    xây dựng dần dần hình ảnh tái tạo của đối tượng.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                  <h3>Kết quả (Reconstructed Image)</h3>
+                  <p>
+                    Sau khi chiếu ngược tất cả các góc độ, ta nhận được hình ảnh tái tạo hoàn chỉnh 
+                    của cấu trúc nội bộ đối tượng.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Filtering -->
+          <article id="filtering" class="content-card">
+            <div class="card-icon">
+              <i class="fas fa-filter"></i>
+            </div>
+            <h2>Filtering - Bước lọc dữ liệu</h2>
+            <h3>Tại sao cần lọc?</h3>
+            <p>
+              Nếu chỉ thực hiện back-projection đơn giản (không lọc), hình ảnh kết quả sẽ bị mờ và 
+              thiếu độ tương phản. Bộ lọc giúp làm sắc nét các cạnh và chi tiết trong hình ảnh.
+            </p>
+            <h3>Các loại bộ lọc phổ biến</h3>
+            <div class="filter-grid">
+              <div class="filter-card">
+                <h4><i class="fas fa-ruler"></i> Ramp Filter (Ram-Lak)</h4>
+                <p>
+                  Bộ lọc cơ bản nhất, tăng cường tần số cao (chi tiết sắc nét). 
+                  Đây là bộ lọc lý tưởng trong lý thuyết.
+                </p>
+              </div>
+              <div class="filter-card">
+                <h4><i class="fas fa-brain"></i> Shepp-Logan Filter</h4>
+                <p>
+                  Phiên bản cải tiến của Ramp filter, giảm nhiễu tốt hơn và thường được sử dụng 
+                  trong CT scan não bộ.
+                </p>
+              </div>
+              <div class="filter-card">
+                <h4><i class="fas fa-wave-square"></i> Hamming Filter</h4>
+                <p>
+                  Bộ lọc mềm hơn, giảm nhiễu tốt nhưng có thể làm mất một số chi tiết nhỏ. 
+                  Phù hợp cho ảnh có nhiều nhiễu.
+                </p>
+              </div>
+              <div class="filter-card">
+                <h4><i class="fas fa-chart-line"></i> Hann Filter</h4>
+                <p>
+                  Tương tự Hamming, cân bằng giữa giảm nhiễu và giữ chi tiết. 
+                  Thường dùng trong các ứng dụng y khoa.
+                </p>
+              </div>
+            </div>
+            <div class="highlight-box warning">
+              <i class="fas fa-balance-scale"></i>
+              <p>
+                <strong>Trade-off:</strong> Bộ lọc mạnh (như Ramp) cho hình ảnh sắc nét nhưng nhiễu nhiều. 
+                Bộ lọc mềm (như Hamming) giảm nhiễu nhưng có thể làm mờ chi tiết.
+              </p>
+            </div>
+          </article>
+
+          <!-- Back-Projection -->
+          <article id="backprojection" class="content-card">
+            <div class="card-icon">
+              <i class="fas fa-undo"></i>
+            </div>
+            <h2>Back-Projection - Chiếu ngược</h2>
+            <h3>Nguyên lý hoạt động</h3>
+            <p>
+              Back-projection là quá trình "đảo ngược" của projection. Với mỗi góc chiếu, 
+              ta "phết" (smear) dữ liệu đã lọc trở lại không gian ảnh theo hướng của tia chiếu.
+            </p>
+            <h3>Cách thực hiện</h3>
+            <ol class="process-list">
+              <li>
+                <strong>Bước 1:</strong> Bắt đầu với một ảnh trống (tất cả pixel = 0)
+              </li>
+              <li>
+                <strong>Bước 2:</strong> Với mỗi góc chiếu (từ sinogram đã lọc):
+                <ul>
+                  <li>Lấy ra một "dòng" dữ liệu tương ứng với góc đó</li>
+                  <li>"Phết" dữ liệu này trở lại ảnh theo hướng vuông góc với detector</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Bước 3:</strong> Cộng dồn tất cả các lần chiếu ngược lại với nhau
+              </li>
+              <li>
+                <strong>Bước 4:</strong> Normalize (chuẩn hóa) giá trị pixel về đúng scale
+              </li>
+            </ol>
+            <div class="highlight-box success">
+              <i class="fas fa-magic"></i>
+              <p>
+                Khi có đủ nhiều projection từ nhiều góc độ (thường ≥180), các vùng thuộc về 
+                cấu trúc thật sẽ được "tăng cường" bởi nhiều lần chiếu ngược, trong khi nhiễu sẽ 
+                được phân tán và giảm đi.
+              </p>
+            </div>
+          </article>
+
+          <!-- Ứng dụng -->
+          <article id="applications" class="content-card">
+            <div class="card-icon">
+              <i class="fas fa-hospital"></i>
+            </div>
+            <h2>Ứng dụng thực tế của FBP</h2>
+            <h3>Y khoa (Medical Imaging)</h3>
+            <ul class="app-list">
+              <li>
+                <i class="fas fa-x-ray"></i>
+                <div>
+                  <strong>CT Scan:</strong> Chụp cắt lớp vi tính để chẩn đoán bệnh lý não, tim, phổi, xương...
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-radiation"></i>
+                <div>
+                  <strong>PET Scan:</strong> Chụp cắt lớp phát xạ positron để phát hiện ung thư
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-atom"></i>
+                <div>
+                  <strong>SPECT:</strong> Chụp cắt lớp phát xạ photon đơn trong y học hạt nhân
+                </div>
+              </li>
+            </ul>
+            <h3>Các lĩnh vực khác</h3>
+            <ul class="app-list">
+              <li>
+                <i class="fas fa-industry"></i>
+                <div>
+                  <strong>Kiểm tra không phá hủy (NDT):</strong> Kiểm tra khuyết tật trong kim loại, vật liệu
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-search"></i>
+                <div>
+                  <strong>An ninh sân bay:</strong> Quét hành lý để phát hiện vật nguy hiểm
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-flask"></i>
+                <div>
+                  <strong>Nghiên cứu khoa học:</strong> Phân tích cấu trúc vật liệu, địa chất, khảo cổ
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Ưu nhược điểm -->
+          <article id="advantages" class="content-card">
+            <div class="card-icon">
+              <i class="fas fa-balance-scale-right"></i>
+            </div>
+            <h2>Ưu điểm & Nhược điểm của FBP</h2>
+            
+            <div class="pros-cons">
+              <div class="pros">
+                <h3><i class="fas fa-thumbs-up"></i> Ưu điểm</h3>
+                <ul>
+                  <li>
+                    <i class="fas fa-check"></i>
+                    <strong>Tốc độ nhanh:</strong> Tính toán đơn giản, phù hợp cho xử lý real-time
+                  </li>
+                  <li>
+                    <i class="fas fa-check"></i>
+                    <strong>Ổn định:</strong> Thuật toán đã được chứng minh và sử dụng rộng rãi
+                  </li>
+                  <li>
+                    <i class="fas fa-check"></i>
+                    <strong>Đơn giản:</strong> Dễ hiểu, dễ implement và debug
+                  </li>
+                  <li>
+                    <i class="fas fa-check"></i>
+                    <strong>Chất lượng tốt:</strong> Cho kết quả tốt khi có đủ projection
+                  </li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h3><i class="fas fa-thumbs-down"></i> Nhược điểm</h3>
+                <ul>
+                  <li>
+                    <i class="fas fa-times"></i>
+                    <strong>Nhiễu (Artifacts):</strong> Dễ bị ảnh hưởng bởi nhiễu và artifacts
+                  </li>
+                  <li>
+                    <i class="fas fa-times"></i>
+                    <strong>Yêu cầu nhiều data:</strong> Cần nhiều projection để có kết quả tốt
+                  </li>
+                  <li>
+                    <i class="fas fa-times"></i>
+                    <strong>Liều xạ:</strong> Nhiều projection = nhiều liều xạ cho bệnh nhân
+                  </li>
+                  <li>
+                    <i class="fas fa="times"></i>
+                    <strong>Kém hơn iterative methods:</strong> Chất lượng không tốt bằng các phương pháp lặp hiện đại (như ML)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Call to Action -->
+          <article class="cta-card">
+            <h2>Sẵn sàng thực hành?</h2>
+            <p>
+              Bây giờ bạn đã hiểu lý thuyết về FBP, hãy thử nghiệm thuật toán này 
+              trực tiếp trên nền tảng mô phỏng của chúng tôi!
+            </p>
+            <div class="cta-buttons">
+              <a href="../mophong/index.html" class="btn-primary">
+                <i class="fas fa-cube"></i>
+                <span>Mô phỏng 3D</span>
+              </a>
+              <a href="../analysis/index.html" class="btn-outline">
+                <i class="fas fa-chart-bar"></i>
+                <span>Phân tích ảnh</span>
+              </a>
+            </div>
+          </article>
+
+        </main>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-brand">
+              <svg class="footer-logo" viewBox="0 0 40 40" width="40" height="40">
+                <defs>
+                  <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+                <circle cx="20" cy="20" r="18" fill="url(#footerGradient)"/>
+                <path d="M12 14h10M12 20h6M12 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+              <span>FBP</span>
+            </div>
+            <p class="footer-desc">
+              Nền tảng học tập thuật toán Filter Back-Projection chuyên nghiệp và hiệu quả.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Học tập</h4>
+            <ul class="footer-links">
+              <li><a href="../theory/index.html"><i class="fas fa-angle-right"></i> Lý thuyết</a></li>
+              <li><a href="../mophong/index.html"><i class="fas fa-angle-right"></i> Mô phỏng 3D</a></li>
+              <li><a href="../analysis/index.html"><i class="fas fa-angle-right"></i> Phân tích</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Về chúng tôi</h4>
+            <ul class="footer-links">
+              <li><a href="../about/index.html"><i class="fas fa-angle-right"></i> Giới thiệu</a></li>
+              <li><a href="../contact/index.html"><i class="fas fa-angle-right"></i> Liên hệ</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Theo dõi</h4>
+            <div class="footer-social">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 FBP Platform. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="theory.js"></script>
+</body>
+</html>
