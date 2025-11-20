@@ -8,23 +8,24 @@ let analyzeButtonInitialized = false;
 async function loadLatestVideo() {
   const resultVideo = document.getElementById('result-video');
   const uploadInfo = document.getElementById('upload-info');
-  
+
   try {
     const response = await fetch('http://localhost:5000/api/get_latest_video');
-    
+
     console.log('Response status:', response.status);
-    
+
     if (response.ok) {
       const data = await response.json();
       console.log('Video data:', data);
-      
+
       if (data.success && data.video_url) {
         const videoUrl = `http://localhost:5000${data.video_url}`;
         console.log('Loading video from:', videoUrl);
-        
+
         resultVideo.innerHTML = `
           <div style="width: 100%; text-align: center;">
             <video controls autoplay muted width="100%" style="max-width: 360px; border-radius: 8px; background: #000;">
+              <source src="${videoUrl}" type="video/webm">
               <source src="${videoUrl}" type="video/mp4">
               Trình duyệt không hỗ trợ video.
             </video>
@@ -81,26 +82,30 @@ async function handleAnalyzeClick() {
       method: 'POST',
       body: formData
     });
-    
+
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.error || 'Lỗi khi xuất video!');
     }
-    
+
     const data = await response.json();
-    
+
     // Hiện video mp4 ở cột phải
     if (data.success && data.video_url) {
-      // Save data for chatbot context
-      localStorage.setItem('latestAnalysis', JSON.stringify({
+      // Save analysis context for chatbot
+      const analysisContext = {
         patientName: data.patient_name,
-        videoName: data.video_url,
         frameCount: data.frame_count,
-        timestamp: new Date().toISOString()
-      }));
+        timestamp: new Date().toISOString(),
+        videoUrl: data.video_url,
+        detectedFrames: data.detected_frames || []
+      };
+      localStorage.setItem('latestAnalysis', JSON.stringify(analysisContext));
+      console.log('✅ Saved analysis context:', analysisContext);
 
       resultVideo.innerHTML = `
         <video controls autoplay muted width="100%" style="max-width: 360px; border-radius: 8px;">
+          <source src="http://localhost:5000${data.video_url}" type="video/webm">
           <source src="http://localhost:5000${data.video_url}" type="video/mp4">
           Trình duyệt không hỗ trợ video.
         </video>
@@ -124,14 +129,14 @@ async function handleAnalyzeClick() {
 function initAnalysis() {
   const analyzeBtn = document.getElementById('analyze-btn');
   const reloadBtn = document.getElementById('reload-video-btn');
-  
+
   // Only add event listener once
   if (!analyzeButtonInitialized && analyzeBtn) {
     analyzeBtn.addEventListener('click', handleAnalyzeClick);
     analyzeButtonInitialized = true;
     console.log('✅ Analysis page initialized');
   }
-  
+
   // Thêm sự kiện cho nút tải lại video
   if (reloadBtn) {
     reloadBtn.addEventListener('click', () => {
@@ -139,7 +144,7 @@ function initAnalysis() {
       console.log('🔄 Đang tải lại video mới nhất...');
     });
   }
-  
+
   // Tự động tải video mới nhất
   loadLatestVideo();
 }

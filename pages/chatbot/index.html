@@ -9,7 +9,17 @@
   <link rel="stylesheet" href="../../components/buttons.css" />
   <link rel="stylesheet" href="../../components/header.css" />
   <link rel="stylesheet" href="chatbot.css">
-</head>
+  <!-- Marked.js for Markdown rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <body>
   <!-- Header -->
   <header class="dynamic-header" id="header">
