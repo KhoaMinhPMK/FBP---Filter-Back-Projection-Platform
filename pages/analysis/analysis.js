@@ -91,8 +91,16 @@ async function handleAnalyzeClick() {
     
     // Hiện video mp4 ở cột phải
     if (data.success && data.video_url) {
+      // Save data for chatbot context
+      localStorage.setItem('latestAnalysis', JSON.stringify({
+        patientName: data.patient_name,
+        videoName: data.video_url,
+        frameCount: data.frame_count,
+        timestamp: new Date().toISOString()
+      }));
+
       resultVideo.innerHTML = `
-        <video controls width="100%" style="max-width: 360px; border-radius: 8px;">
+        <video controls autoplay muted width="100%" style="max-width: 360px; border-radius: 8px;">
           <source src="http://localhost:5000${data.video_url}" type="video/mp4">
           Trình duyệt không hỗ trợ video.
         </video>

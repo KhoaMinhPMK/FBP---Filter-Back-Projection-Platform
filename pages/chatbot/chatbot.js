@@ -10,19 +10,31 @@ let conversationHistory = [
   }
 ];
 
+// Load context from analysis
+const latestAnalysis = localStorage.getItem('latestAnalysis');
+if (latestAnalysis) {
+  try {
+    const data = JSON.parse(latestAnalysis);
+    conversationHistory[0].content += `\n\nThông tin phân tích gần đây:\n- Bệnh nhân: ${data.patientName}\n- Số khung hình: ${data.frameCount}\n- Thời gian: ${data.timestamp}\n\nHãy sử dụng thông tin này để hỗ trợ người dùng nếu họ hỏi về kết quả phân tích.`;
+    console.log('✅ Loaded analysis context');
+  } catch (e) {
+    console.error('Error parsing analysis context:', e);
+  }
+}
+
 // Flag to prevent duplicate event listeners
 let formListenerAdded = false;
 
 // Xử lý gửi message
 async function handleChatSubmit(e) {
   e.preventDefault();
-  
+
   const messageInput = document.getElementById('messageInput');
   const chatMessages = document.getElementById('chatMessages');
   const message = messageInput.value.trim();
-  
+
   if (!message) return;
-  
+
   // Thêm user message
   const userMessageEl = document.createElement('div');
   userMessageEl.classList.add('message', 'user-message');
@@ -35,13 +47,13 @@ async function handleChatSubmit(e) {
     </div>
   `;
   chatMessages.appendChild(userMessageEl);
-  
+
   // Clear input
   messageInput.value = '';
-  
+
   // Scroll to bottom
   chatMessages.scrollTop = chatMessages.scrollHeight;
-  
+
   // Hiển thị loading
   const botMessageEl = document.createElement('div');
   botMessageEl.classList.add('message', 'bot-message');
@@ -55,13 +67,30 @@ async function handleChatSubmit(e) {
   `;
   chatMessages.appendChild(botMessageEl);
   chatMessages.scrollTop = chatMessages.scrollHeight;
-  
+
   // Add user message to history
   conversationHistory.push({
     role: "user",
     content: message
   });
-  
+
+  // Check for API key
+  if (!GROQ_API_KEY) {
+    const botMessageEl = document.createElement('div');
+    botMessageEl.classList.add('message', 'bot-message');
+    botMessageEl.innerHTML = `
+      <div class="message-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="message-content">
+        <p>⚠️ Chưa có API Key. Vui lòng cập nhật GROQ_API_KEY trong file chatbot.js hoặc liên hệ quản trị viên.</p>
+      </div>
+    `;
+    chatMessages.appendChild(botMessageEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return;
+  }
+
   try {
     // Call Groq API with reasoning
     const response = await fetch(GROQ_API_URL, {
@@ -71,7 +100,7 @@ async function handleChatSubmit(e) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: "qwen/qwen3-32b",
+        model: "llama3-70b-8192",
         messages: conversationHistory,
         temperature: 0.6,
         max_completion_tokens: 1024,
@@ -79,21 +108,21 @@ async function handleChatSubmit(e) {
         reasoning_format: "parsed"
       })
     });
-    
+
     if (!response.ok) {
       throw new Error('API request failed');
     }
-    
+
     const data = await response.json();
     const assistantMessage = data.choices[0].message.content;
     const reasoning = data.choices[0].message.reasoning;
-    
+
     // Add assistant response to history
     conversationHistory.push({
       role: "assistant",
       content: assistantMessage
     });
-    
+
     // Display response with reasoning
     let responseHTML = `
       <div class="message-avatar">
@@ -101,16 +130,16 @@ async function handleChatSubmit(e) {
       </div>
       <div class="message-content">
     `;
-    
+
     if (reasoning) {
       responseHTML += `<p class="reasoning"><em>🧠 Suy luận: ${reasoning}</em></p><hr style="margin: 8px 0; border-color: rgba(255,255,255,0.1);">`;
     }
-    
+
     responseHTML += `<p>${assistantMessage}</p></div>`;
-    
+
     botMessageEl.innerHTML = responseHTML;
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    
+
   } catch (error) {
     console.error('Error calling Groq API:', error);
     botMessageEl.innerHTML = `
@@ -128,14 +157,14 @@ async function handleChatSubmit(e) {
 // Initialize chatbot
 function initChatbot() {
   const chatForm = document.getElementById('chatForm');
-  
+
   // Only add event listener once
   if (!formListenerAdded && chatForm) {
     chatForm.addEventListener('submit', handleChatSubmit);
     formListenerAdded = true;
     console.log('✅ Chatbot initialized');
   }
-  
+
   // Auto-focus vào input
   const messageInput = document.getElementById('messageInput');
   if (messageInput) {
