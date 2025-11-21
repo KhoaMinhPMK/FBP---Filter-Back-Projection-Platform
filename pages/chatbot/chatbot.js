@@ -1,12 +1,14 @@
 // Groq API Configuration
 const GROQ_API_KEY = ''; // Thay bằng API key thực tế
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+// Flag to prevent duplicate event listeners
+let formListenerAdded = false;
 
 // Conversation history
 let conversationHistory = [
   {
     role: "system",
-    content: "Bạn là trợ lý AI chuyên về thuật toán Filter Back-Projection (FBP) và xử lý ảnh y tế. Hãy trả lời ngắn gọn, rõ ràng và chuyên nghiệp bằng tiếng Việt."
+    content: "Bạn là Trợ lý AI Y tế thông minh, chuyên về chẩn đoán hình ảnh và thuật toán Filter Back-Projection (FBP). Nhiệm vụ của bạn là hỗ trợ bác sĩ phân tích dữ liệu, tư vấn chuyên môn và lập báo cáo khi được yêu cầu. Hãy giữ thái độ chuyên nghiệp, khách quan."
   }
 ];
 
@@ -23,15 +25,12 @@ if (latestAnalysis) {
       });
     }
 
-    conversationHistory[0].content += `\n\nTHÔNG TIN PHÂN TÍCH MỚI NHẤT:\n- Bệnh nhân: ${data.patientName}\n- Số khung hình: ${data.frameCount}\n- Thời gian: ${data.timestamp}${imageContext}\n\nYÊU CẦU TRÌNH BÀY:\n- Luôn trả lời dưới dạng "BÁO CÁO Y KHOA" chuyên nghiệp.\n- Dùng Markdown để định dạng (in đậm, danh sách, tiêu đề).\n- Nếu có ảnh khối u, HÃY HIỂN THỊ CHÚNG trong báo cáo.\n- Ngôn ngữ: Tiếng Việt chuẩn y khoa.`;
+    conversationHistory[0].content += `\n\nDỮ LIỆU PHÂN TÍCH (Tham khảo):\n- Bệnh nhân: ${data.patientName}\n- Số khung hình: ${data.frameCount}\n- Thời gian: ${data.timestamp}${imageContext}\n\nHƯỚNG DẪN ỨNG XỬ (QUAN TRỌNG):\n1. GIAO TIẾP: Nếu người dùng chào hỏi hoặc hỏi chung chung, hãy trả lời ngắn gọn, thân thiện như một trợ lý ảo. KHÔNG tự ý đưa ra báo cáo y khoa ngay lập tức.\n2. LẬP BÁO CÁO: CHỈ KHI người dùng hỏi về "kết quả", "bệnh nhân", "tình trạng", hoặc yêu cầu "báo cáo", hãy đóng vai chuyên gia và tạo "BÁO CÁO Y KHOA" chi tiết (dùng Markdown, chèn ảnh khối u nếu có, đưa ra kiến nghị lâm sàng).\n3. TƯ VẤN: Luôn sẵn sàng giải thích các thuật ngữ, nguyên lý FBP hoặc đưa ra lời khuyên dựa trên dữ liệu.\n- Ngôn ngữ: Tiếng Việt chuẩn y khoa.`;
     console.log('✅ Loaded analysis context with images');
   } catch (e) {
     console.error('Error parsing analysis context:', e);
   }
 }
-
-// Flag to prevent duplicate event listeners
-let formListenerAdded = false;
 
 // Xử lý gửi message
 async function handleChatSubmit(e) {
